@@ -1,0 +1,2353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yahyaoui Mohamed Amine - Mobile Developer & Designer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', monospace;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Space Background */
+        .space-container {
+            background: #000;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated Stars */
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        .star.small {
+            width: 1px;
+            height: 1px;
+        }
+
+        .star.medium {
+            width: 2px;
+            height: 2px;
+        }
+
+        .star.large {
+            width: 3px;
+            height: 3px;
+        }
+
+        /* Flowing Energy Element */
+        .energy-element {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .energy-flow {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                transparent 0%, 
+                rgba(0, 255, 255, 0.1) 20%, 
+                rgba(0, 200, 255, 0.3) 40%, 
+                rgba(0, 150, 255, 0.5) 60%, 
+                rgba(0, 100, 255, 0.4) 80%, 
+                transparent 100%);
+            border-radius: 50% 0 50% 50%;
+            animation: energyPulse 4s ease-in-out infinite;
+            filter: blur(1px);
+        }
+
+        .energy-flow::after {
+            content: '';
+            position: absolute;
+            inset: 20px;
+            background: linear-gradient(135deg, 
+                transparent 0%, 
+                rgba(0, 255, 255, 0.2) 30%, 
+                rgba(0, 200, 255, 0.4) 50%, 
+                rgba(0, 150, 255, 0.3) 70%, 
+                transparent 100%);
+            border-radius: 50% 0 50% 50%;
+            animation: energyPulse 4s ease-in-out infinite reverse;
+        }
+
+        /* Navigation */
+        .navigation {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            display: flex;
+            gap: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-item {
+            color: #00ffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: rgba(0, 255, 255, 0.1);
+            border-color: rgba(0, 255, 255, 0.5);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+            padding: 2rem;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            text-align: center;
+        }
+
+        .chapter-number {
+            font-size: 8rem;
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 3px #00ffff;
+            text-stroke: 3px #00ffff;
+            font-family: 'Cinzel', serif;
+            margin-bottom: -2rem;
+            position: relative;
+            z-index: 1;
+            animation: numberGlow 3s ease-in-out infinite;
+        }
+
+        .chapter-text {
+            font-size: 1.2rem;
+            color: #00ffff;
+            letter-spacing: 8px;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .main-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #00ffff, #0080ff, #004080);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Cinzel', serif;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #00ffff;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00ffff;
+            font-size: 0.9rem;
+            animation: bounce 2s infinite;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .profile-container {
+            text-align: center;
+        }
+
+        .profile-frame {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 3px solid #00ffff;
+            padding: 10px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1));
+            position: relative;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            overflow: hidden;
+        }
+
+        .about-info h2 {
+            font-size: 3rem;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            font-family: 'Cinzel', serif;
+        }
+
+        .info-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            border-color: rgba(0, 255, 255, 0.5);
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .info-label {
+            color: #00ffff;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-value {
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        /* Skills Section */
+        .skills-content {
+            max-width: 1400px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 4rem;
+            color: #00ffff;
+            font-family: 'Cinzel', serif;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-card {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid rgba(0, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .skill-card:hover::before {
+            left: 100%;
+        }
+
+        .skill-card:hover {
+            border-color: rgba(0, 255, 255, 0.6);
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+        }
+
+        .skill-category {
+            font-size: 1.5rem;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(0, 255, 255, 0.2);
+            border-color: rgba(0, 255, 255, 0.6);
+            transform: scale(1.05);
+        }
+
+        /* Experience Section */
+        .experience-content {
+            max-width: 1200px;
+        }
+
+        .experience-timeline {
+            position: relative;
+            margin-top: 3rem;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #00ffff, transparent);
+            transform: translateX(-50%);
+        }
+
+        .experience-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .experience-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .experience-number {
+            font-size: 8rem;
+            color: transparent;
+            -webkit-text-stroke: 2px #00ffff;
+            text-stroke: 2px #00ffff;
+            font-family: 'Cinzel', serif;
+            width: 200px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .experience-details {
+            flex: 1;
+            padding: 2rem;
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 15px;
+            margin: 0 2rem;
+        }
+
+        .experience-title {
+            font-size: 1.8rem;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+            font-family: 'Cinzel', serif;
+        }
+
+        .experience-company {
+            font-size: 1rem;
+            color: #0080ff;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .experience-date {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .experience-description {
+            color: #e0e0e0;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .experience-achievements {
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .experience-achievements li {
+            color: #e0e0e0;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .experience-achievements li::before {
+            content: '▶';
+            color: #00ffff;
+            position: absolute;
+            left: 0;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        /* Education Section */
+        .education-content {
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        .education-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .education-item {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid rgba(0, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .education-item:hover {
+            border-color: rgba(0, 255, 255, 0.6);
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .education-degree {
+            font-size: 1.5rem;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .education-school {
+            color: #0080ff;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .education-year {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Achievements Section */
+        .achievements-content {
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .achievement-item {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid rgba(0, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #00ffff, #0080ff);
+            clip-path: polygon(100% 0, 0 0, 100% 100%);
+        }
+
+        .achievement-item:hover {
+            border-color: rgba(0, 255, 255, 0.6);
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .achievement-title {
+            font-size: 1.5rem;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .achievement-subtitle {
+            color: #0080ff;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .achievement-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .achievement-description {
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .achievement-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #00ffff;
+            color: #000;
+            padding: 0.3rem 0.6rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Languages Section */
+        .languages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .language-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .language-item:hover {
+            border-color: rgba(0, 255, 255, 0.5);
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        .language-name {
+            font-size: 1.2rem;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .language-level {
+            display: flex;
+            justify-content: center;
+            gap: 0.3rem;
+            margin-top: 0.5rem;
+        }
+
+        .level-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(0, 255, 255, 0.3);
+        }
+
+        .level-dot.filled {
+            background: #00ffff;
+        }
+
+        /* Projects Section */
+        .projects-content {
+            max-width: 1400px;
+            text-align: center;
+        }
+
+        .projects-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid rgba(0, 255, 255, 0.2);
+            color: #00ffff;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .tab-button:hover::before {
+            left: 100%;
+        }
+
+        .tab-button.active {
+            background: rgba(0, 255, 255, 0.1);
+            border-color: rgba(0, 255, 255, 0.6);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .tab-button:hover {
+            border-color: rgba(0, 255, 255, 0.5);
+            background: rgba(0, 255, 255, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid rgba(0, 255, 255, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+            z-index: 1;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            border-color: rgba(0, 255, 255, 0.6);
+            background: rgba(0, 255, 255, 0.08);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #001122, #003366, #001122);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #00ffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        .project-info {
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            font-family: 'Cinzel', serif;
+        }
+
+        .project-description {
+            color: #e0e0e0;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tag {
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(45deg, #00ffff, #0080ff);
+            color: #000;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .project-link:hover {
+            background: linear-gradient(45deg, #0080ff, #00ffff);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .coming-soon {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px dashed rgba(0, 255, 255, 0.3);
+            border-radius: 20px;
+            margin: 2rem 0;
+        }
+
+        .coming-soon-icon {
+            font-size: 4rem;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        .coming-soon h3 {
+            color: #00ffff;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-family: 'Cinzel', serif;
+        }
+
+        .coming-soon p {
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .contact-content {
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid rgba(0, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            border-color: rgba(0, 255, 255, 0.6);
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .contact-symbol {
+            font-size: 2rem;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .contact-label {
+            color: #00ffff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-value {
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 80vw;
+            max-height: 80vh;
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 3px solid #00ffff;
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.8);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            max-height: calc(80vh - 80px);
+            object-fit: contain;
+            display: block;
+            background: #111;
+        }
+
+        .modal-header {
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            padding: 20px 25px;
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: #00ffff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1002;
+            background: rgba(0, 0, 0, 0.8);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #00ffff;
+        }
+
+        .close:hover {
+            color: #fff;
+            background: #00ffff;
+            color: #000;
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+        }
+
+        .pdf-container {
+            width: 90vw;
+            height: 90vh;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .pdf-frame {
+            width: 100%;
+            height: calc(100% - 60px);
+            border: none;
+        }
+
+        /* Logo cards specific styling */
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            background: #f8f9fa;
+            padding: 10px;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        /* Responsive modal */
+        @media (max-width: 768px) {
+            .modal-content {
+                max-width: 95vw;
+                max-height: 85vh;
+            }
+            
+            .modal-image {
+                max-height: calc(85vh - 80px);
+            }
+            
+            .modal-header {
+                font-size: 1.1rem;
+                padding: 15px 20px;
+            }
+            
+            .close {
+                font-size: 30px;
+                width: 40px;
+                height: 40px;
+                top: 5px;
+                right: 10px;
+            }
+        }hover {
+            color: #fff;
+            text-shadow: 0 0 10px #00ffff;
+            transform: scale(1.1);
+        }
+
+        .pdf-container {
+            width: 90vw;
+            height: 90vh;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .pdf-frame {
+            width: 100%;
+            height: calc(100% - 60px);
+            border: none;
+        }
+
+        /* Animations */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes energyPulse {
+            0%, 100% { 
+                opacity: 0.6;
+                transform: scale(1) rotate(0deg);
+            }
+            50% { 
+                opacity: 0.9;
+                transform: scale(1.1) rotate(5deg);
+            }
+        }
+
+        @keyframes numberGlow {
+            0%, 100% { 
+                text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+                -webkit-text-stroke-color: #00ffff;
+            }
+            50% { 
+                text-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+                -webkit-text-stroke-color: #00ccff;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        @keyframes profileRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .chapter-number { font-size: 8rem; }
+            .main-title { font-size: 2rem; }
+            .about-content { grid-template-columns: 1fr; gap: 2rem; }
+            .experience-item { flex-direction: column !important; }
+            .experience-item:nth-child(even) { flex-direction: column !important; }
+            .experience-details { margin: 1rem 0; }
+            .timeline-line { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            .navigation { 
+                flex-wrap: wrap;
+                gap: 0.5rem; 
+                padding: 1rem;
+            }
+            .chapter-number { font-size: 6rem; }
+            .main-title { font-size: 2.5rem; }
+            .section-title { font-size: 2.5rem; }
+            .profile-frame { width: 200px; height: 200px; }
+            .experience-number { font-size: 4rem; width: auto; }
+            .achievements-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .chapter-number { font-size: 4rem; }
+            .main-title { font-size: 1rem; }
+            .section-title { font-size: 2rem; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="space-container">
+        <!-- Animated Stars -->
+        <div class="stars" id="stars"></div>
+
+        <!-- Flowing Energy Element -->
+        <div class="energy-element">
+            <div class="energy-flow"></div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="navigation">
+            <a href="#welcome" class="nav-item active" onclick="scrollToSection('welcome')">Home</a>
+            <a href="#about" class="nav-item" onclick="scrollToSection('about')">About</a>
+            <a href="#skills" class="nav-item" onclick="scrollToSection('skills')">Skills</a>
+            <a href="#projects" class="nav-item" onclick="scrollToSection('projects')">Projects</a>
+            <a href="#experience" class="nav-item" onclick="scrollToSection('experience')">Experience</a>
+            <a href="#education" class="nav-item" onclick="scrollToSection('education')">Education</a>
+            <a href="#achievements" class="nav-item" onclick="scrollToSection('achievements')">Achievements</a>
+            <a href="#contact" class="nav-item" onclick="scrollToSection('contact')">Contact</a>
+        </nav>
+
+        <!-- Welcome Section -->
+        <section id="welcome" class="section welcome-section">
+            <div>
+                <div class="chapter-number">portfolio</div>
+                <h1 class="main-title">Yahyaoui Mohamed Amine</h1>
+                <div class="scroll-indicator">
+                    ↓ Scroll to explore ↓
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="about-content">
+                <div class="profile-container">
+                    <div class="profile-frame">
+                        <div class="profile-image">
+                            <img src="Yahyaoui_mohamedamine_LAM.jpg" alt="Profile" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-info">
+                    <h2>About Me</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Name</div>
+                            <div class="info-value">Yahyaoui Mohamed Amine</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Title</div>
+                            <div class="info-value">Mobile Developer & Designer</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Location</div>
+                            <div class="info-value">L'aaouina, Tunis</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Email</div>
+                            <div class="info-value">mohamedamine.yahyaoui@isimg.tn</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Phone</div>
+                            <div class="info-value">+216-96351731</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">LinkedIn</div>
+                            <div class="info-value">mohamedamineyahyaoui</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Languages Section -->
+                    <h3 style="color: #00ffff; font-size: 1.5rem; margin: 2rem 0 1rem 0;">Languages</h3>
+                    <div class="languages-grid">
+                        <div class="language-item">
+                            <div class="language-name">English</div>
+                            <div class="language-level">
+                                <div class="level-dot filled"></div>
+                                <div class="level-dot filled"></div>
+                                <div class="level-dot filled"></div>
+                                <div class="level-dot"></div>
+                            </div>
+                        </div>
+                        <div class="language-item">
+                            <div class="language-name">Arabic</div>
+                            <div class="language-level">
+                                <div class="level-dot filled"></div>
+                                <div class="level-dot filled"></div>
+                                <div class="level-dot filled"></div>
+                                <div class="level-dot filled"></div>
+                            </div>
+                        </div>
+                        <div class="language-item">
+                            <div class="language-name">French</div>
+                            <div class="language-level">
+                                <div class="level-dot filled"></div>
+                                <div class="level-dot filled"></div>
+                                <div class="level-dot"></div>
+                                <div class="level-dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section">
+            <div class="skills-content">
+                <h2 class="section-title">Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-category">Mobile Development</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">IONIC</span>
+                            <span class="skill-tag">FLUTTER</span>
+                            <span class="skill-tag">Android Studio</span>
+                            <span class="skill-tag">Kotlin</span>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-category">Frontend Technologies</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">HTML</span>
+                            <span class="skill-tag">CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">TypeScript</span>
+                            <span class="skill-tag">Angular</span>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-category">Backend & Database</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">PHP</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">Django</span>
+                            <span class="skill-tag">XML</span>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-category">Design & Multimedia</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">FIGMA</span>
+                            <span class="skill-tag">After Effects</span>
+                            <span class="skill-tag">Photoshop</span>
+                            <span class="skill-tag">Illustrator</span>
+                            <span class="skill-tag">XD</span>
+                            <span class="skill-tag">InDesign</span>
+                            <span class="skill-tag">Premiere Pro</span>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-category">Development Tools</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Unity</span>
+                            <span class="skill-tag">UI/UX</span>
+                            <span class="skill-tag">Java Script</span>
+                            <span class="skill-tag">Type Script</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="projects-content">
+                <h2 class="section-title">Projects</h2>
+                
+                <!-- Project Category Tabs -->
+                <div class="projects-tabs">
+                    <button class="tab-button active" onclick="showTab('uiux')">UI/UX Design</button>
+                    <button class="tab-button" onclick="showTab('design')">Graphic Design</button>
+                    <button class="tab-button" onclick="showTab('development')">Development</button>
+                </div>
+
+                <!-- UI/UX Projects Tab -->
+                <div id="uiux" class="tab-content active">
+                    <div class="projects-grid">
+                        <div class="project-card" onclick="window.open('https://www.figma.com/design/gD3wMmTjq6MXQjI5R1Efel/Untitled?node-id=0-1&p=f&t=F4W7smTR5Awkm7Yr-0', '_blank')">
+                            <div class="project-image"></div>
+                            <div class="project-info">
+                                <h3 class="project-title">UI Design Project #1</h3>
+                                <p class="project-description">
+                                    A comprehensive UI design showcasing modern interface design principles with clean layouts and intuitive user experience patterns.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="project-tag">Figma</span>
+                                    <span class="project-tag">UI Design</span>
+                                    <span class="project-tag">Prototyping</span>
+                                </div>
+                                <span class="project-link">
+                                    View in Figma →
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="project-card" onclick="window.open('https://www.figma.com/design/MYbR4ZrfvQ2OVnj2p4W8xh/Music-and-Podcasts---Mobile-App--Community-?node-id=0-1&p=f&t=DycMm1LKwDcL3jOo-0', '_blank')">
+                            <div class="project-image"></div>
+                            <div class="project-info">
+                                <h3 class="project-title">Music & Podcasts Mobile App</h3>
+                                <p class="project-description">
+                                    A modern mobile app design for music and podcasts with engaging user interface, smooth navigation, and community features.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="project-tag">Mobile Design</span>
+                                    <span class="project-tag">Music App</span>
+                                    <span class="project-tag">Community Features</span>
+                                    <span class="project-tag">Figma</span>
+                                </div>
+                                <span class="project-link">
+                                    View in Figma →
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="project-card" onclick="window.open('https://www.figma.com/design/6HptHfwHQBEWZ0bsTt2dD4/Finance-App-UI-KIt--Community-?node-id=5-2&p=f&t=bkkTVGrCZ01gkpI7-0', '_blank')">
+                            <div class="project-image"></div>
+                            <div class="project-info">
+                                <h3 class="project-title">Finance App UI Kit</h3>
+                                <p class="project-description">
+                                    A comprehensive finance application UI kit featuring modern financial interfaces, dashboard designs, and transaction management screens.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="project-tag">Finance</span>
+                                    <span class="project-tag">UI Kit</span>
+                                    <span class="project-tag">Dashboard</span>
+                                    <span class="project-tag">Mobile App</span>
+                                </div>
+                                <span class="project-link">
+                                    View in Figma →
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="project-card" onclick="window.open('https://www.figma.com/design/6v1uKevFsvzaav7KZMqoyq/allcarta?node-id=0-1&p=f&t=DFjRssOXLmr2WsR2-0', '_blank')">
+                            <div class="project-image"></div>
+                            <div class="project-info">
+                                <h3 class="project-title">AllCarta - University Management</h3>
+                                <p class="project-description">
+                                    University club management application design with comprehensive user interface for student organizations, event management, and member coordination.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="project-tag">University</span>
+                                    <span class="project-tag">Management App</span>
+                                    <span class="project-tag">Student Portal</span>
+                                    <span class="project-tag">AllCarta</span>
+                                </div>
+                                <span class="project-link">
+                                    View in Figma →
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Graphic Design Projects Tab -->
+                <div id="design" class="tab-content">
+                    <!-- Logo Section -->
+                    <div style="margin-bottom: 4rem;">
+                        <h3 style="color: #00ffff; font-size: 2rem; margin-bottom: 2rem; text-align: center; font-family: 'Cinzel', serif;">
+                             Logo Design
+                        </h3>
+                        <div class="projects-grid">
+                            <!-- Logo 1 -->
+                            <div class="project-card" onclick="openImageModal('1.jpg', 'Ezdihar Coffee Logo Design')">
+                                <div class="project-image">
+                                    <img src="1.jpg" alt="Logo Design 1" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Ezdihar Coffee Logo Design</h3>
+                                    <p class="project-description">
+                                        Modern and professional logo design with clean aesthetics and strong brand identity elements.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Logo Design</span>
+                                        <span class="project-tag">Brand Identity</span>
+                                        <span class="project-tag">Professional</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Logo 2 -->
+                            <div class="project-card" onclick="openImageModal('2.png', 'Chloris Flower Shop Logo Design')">
+                                <div class="project-image">
+                                    <img src="2.png" alt="Logo Design 2" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Chloris Flower Shop Logo Design</h3>
+                                    <p class="project-description">
+                                        Innovative logo concept with creative typography and symbolic elements for brand recognition.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Creative Design</span>
+                                        <span class="project-tag">Typography</span>
+                                        <span class="project-tag">Symbol Design</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Logo 3 -->
+                            <div class="project-card" onclick="openImageModal('3.png', 'University of Gabes Logo Design')">
+                                <div class="project-image">
+                                    <img src="3.png" alt="Logo Design 3" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">University of Gabes Logo Design</h3>
+                                    <p class="project-description">
+                                        Contemporary logo design with minimalist approach and strong visual impact for modern brands.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Modern Design</span>
+                                        <span class="project-tag">Minimalist</span>
+                                        <span class="project-tag">Contemporary</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Logo 4 -->
+                            <div class="project-card" onclick="openImageModal('4.png', 'Allcarta Logo Design')">
+                                <div class="project-image">
+                                    <img src="4.png" alt="Logo Design 4" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Allcarta Logo Design</h3>
+                                    <p class="project-description">
+                                        Professional corporate logo with sophisticated design elements and strong business appeal.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Corporate</span>
+                                        <span class="project-tag">Business</span>
+                                        <span class="project-tag">Professional</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Logo 5 -->
+                            <div class="project-card" onclick="openImageModal('5.jpg', 'Artech Logo Design')">
+                                <div class="project-image">
+                                    <img src="5.jpg" alt="Logo Design 5" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Artech Logo Design</h3>
+                                    <p class="project-description">
+                                        Creative and artistic logo approach with unique visual elements and expressive design language.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Artistic</span>
+                                        <span class="project-tag">Creative</span>
+                                        <span class="project-tag">Expressive</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Logo 6 -->
+                            <div class="project-card" onclick="openImageModal('6.png', 'Star Assurance Logo Design')">
+                                <div class="project-image">
+                                    <img src="6.png" alt="Logo Design 6" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Star Assurance Logo Design</h3>
+                                    <p class="project-description">
+                                        Sophisticated and elegant logo design with refined aesthetics and premium brand positioning.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Elegant</span>
+                                        <span class="project-tag">Sophisticated</span>
+                                        <span class="project-tag">Premium</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Logo 7 -->
+                            <div class="project-card" onclick="openImageModal('7.jpg', 'BTE Logo Design')">
+                                <div class="project-image">
+                                    <img src="7.jpg" alt="Logo Design 7" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Bank of Tunisia and Emirates Logo Design</h3>
+                                    <p class="project-description">
+                                        Dynamic and energetic logo design with motion-inspired elements and vibrant visual appeal.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Dynamic</span>
+                                        <span class="project-tag">Energetic</span>
+                                        <span class="project-tag">Motion Design</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Logo 8 -->
+                            <div class="project-card" onclick="openImageModal('8.png', 'ISIMG Logo Design')">
+                                <div class="project-image">
+                                    <img src="8.png" alt="Logo Design 8" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">ISIMG Logo Design</h3>
+                                    <p class="project-description">
+                                        Cutting-edge logo design with innovative concepts and forward-thinking brand identity approach.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Innovative</span>
+                                        <span class="project-tag">Cutting-edge</span>
+                                        <span class="project-tag">Forward-thinking</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Graphic Charte Section -->
+                    <div style="margin-top: 4rem;">
+                        <h3 style="color: #00ffff; font-size: 2rem; margin-bottom: 2rem; text-align: center; font-family: 'Cinzel', serif;">
+                             Graphic Charte & Brand Guidelines
+                        </h3>
+                        <div class="projects-grid">
+                            <!-- BTE Digital Graphic Charter -->
+                            <div class="project-card" onclick="openPDFModal('charte graphique digitale bte.pdf', 'BTE Digital Graphic Charter')">
+                                <div class="project-image" style="background: linear-gradient(135deg, #2A2765, #E9AE21);">
+                                    <div style="font-size: 4rem; color: white;"></div>
+                                    <div style="position: absolute; bottom: 10px; left: 10px; right: 10px; background: rgba(0,0,0,0.8); padding: 10px; border-radius: 5px; font-size: 0.9rem;">
+                                        BTE Bank Graphic Charter
+                                    </div>
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">BTE Digital Graphic Charter</h3>
+                                    <p class="project-description">
+                                        Comprehensive brand guidelines for Bank of Tunisia and Emirates (BTE) including logo usage, color palette, typography, and application standards.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Brand Guidelines</span>
+                                        <span class="project-tag">Banking Design</span>
+                                        <span class="project-tag">Digital Charter</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View PDF →
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- General Graphic Charter -->
+                            <div class="project-card" onclick="openPDFModal('charteeee.pdf', 'Comprehensive Graphic Charter')">
+                                <div class="project-image" style="background: linear-gradient(135deg, #129939, #242f5d);">
+                                    <div style="font-size: 4rem; color: white;"></div>
+                                    <div style="position: absolute; bottom: 10px; left: 10px; right: 10px; background: rgba(0,0,0,0.8); padding: 10px; border-radius: 5px; font-size: 0.9rem;">
+                                        ISIMG Graphic Charter
+                                    </div>
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">ISIMG Graphic Charter</h3>
+                                    <p class="project-description">
+                                        Complete visual identity guidelines for Institut Supérieur d'Informatique et de Multimédia de Gabès, featuring logo construction, color systems, and brand applications.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Educational Branding</span>
+                                        <span class="project-tag">Visual Identity</span>
+                                        <span class="project-tag">Academic Design</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View PDF →
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- NOISE Brand Guidelines -->
+                            <div class="project-card" onclick="openPDFModal('NOISE NEW FILE.pdf', 'NOISE Brand Guidelines')">
+                                <div class="project-image" style="background: linear-gradient(135deg, #2E2E3C, #00ffff);">
+                                    <div style="font-size: 4rem; color: white;"></div>
+                                    <div style="position: absolute; bottom: 10px; left: 10px; right: 10px; background: rgba(0,0,0,0.8); padding: 10px; border-radius: 5px; font-size: 0.9rem;">
+                                        NOISE Streetwear Charter
+                                    </div>
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">NOISE Streetwear Brand Guidelines</h3>
+                                    <p class="project-description">
+                                        Complete brand identity package for NOISE streetwear brand, including logo guidelines, color schemes, typography, and merchandising applications.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Streetwear Branding</span>
+                                        <span class="project-tag">Fashion Design</span>
+                                        <span class="project-tag">Brand Charter</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View PDF →
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Affiches Section -->
+                    <div style="margin-top: 4rem;">
+                        <h3 style="color: #00ffff; font-size: 2rem; margin-bottom: 2rem; text-align: center; font-family: 'Cinzel', serif;">
+                            🎨 Affiches & Poster Design
+                        </h3>
+                        <div class="projects-grid">
+                            <!-- GOT HUSTLE Poster -->
+                            <div class="project-card" onclick="openImageModal('ZEBRA.png', 'GOT HUSTLE 2023 - Event Poster')">
+                                <div class="project-image">
+                                    <img src="ZEBRA.png" alt="GOT HUSTLE Event Poster" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">GOT HUSTLE 2023 - Event Poster</h3>
+                                    <p class="project-description">
+                                        Dynamic event poster featuring bold typography and urban aesthetic with striking design elements for a contemporary entertainment event.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Event Design</span>
+                                        <span class="project-tag">Urban Aesthetic</span>
+                                        <span class="project-tag">Bold Typography</span>
+                                        <span class="project-tag">Entertainment</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Parfume Book Cover -->
+                            <div class="project-card" onclick="openImageModal('parfume book_Plan de travail 1.jpg', 'PARFUME Book Cover Design')">
+                                <div class="project-image">
+                                    <img src="parfume book_Plan de travail 1.jpg" alt="Parfume Book Cover" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">PARFUME Book Cover Design</h3>
+                                    <p class="project-description">
+                                        Professional book cover design for "Parfume: The Story of a Murderer" featuring atmospheric imagery and sophisticated typography layout for literary publication.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Book Design</span>
+                                        <span class="project-tag">Literary Cover</span>
+                                        <span class="project-tag">Atmospheric Design</span>
+                                        <span class="project-tag">Print Design</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Monster Energy Ad -->
+                            <div class="project-card" onclick="openImageModal('Plan de travail 1-100.jpg', 'Monster Energy - Product Advertisement')">
+                                <div class="project-image">
+                                    <img src="Plan de travail 1-100.jpg" alt="Monster Energy Ad" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Monster Energy - Product Advertisement</h3>
+                                    <p class="project-description">
+                                        High-energy product advertisement featuring Monster Energy's signature green and black branding with dynamic geometric elements and bold "BE ENERGY" messaging.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Product Advertising</span>
+                                        <span class="project-tag">Brand Campaign</span>
+                                        <span class="project-tag">Energy Drinks</span>
+                                        <span class="project-tag">Dynamic Design</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- ML Workshop -->
+                            <div class="project-card" onclick="openImageModal('ieee affiche CARR.jpg', 'ML Workshop & Hackathon Posters')">
+                                <div class="project-image">
+                                    <img src="ieee affiche CARR.jpg" alt="ML Workshop" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">ML Workshop & Hackathon Posters</h3>
+                                    <p class="project-description">
+                                        Tech event posters for machine learning workshops and hackathons featuring futuristic AI imagery and modern tech-focused design elements for educational events.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">AI/ML Events</span>
+                                        <span class="project-tag">Educational Design</span>
+                                        <span class="project-tag">Tech Events</span>
+                                        <span class="project-tag">Futuristic Design</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Adventure Time -->
+                            <div class="project-card" onclick="openImageModal('484049392_664810809551086_3340740348048279053_n.jpg', 'Adventure Time - Camp Event')">
+                                <div class="project-image">
+                                    <img src="484049392_664810809551086_3340740348048279053_n.jpg" alt="Adventure Time" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Adventure Time - Camp Event</h3>
+                                    <p class="project-description">
+                                        Outdoor adventure event poster with dynamic green color scheme and adventure photography promoting camping activities and outdoor experiences in Gheninni.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Adventure Events</span>
+                                        <span class="project-tag">Outdoor Activities</span>
+                                        <span class="project-tag">Event Photography</span>
+                                        <span class="project-tag">Nature Design</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- TAKAPES Cultural Project -->
+                            <div class="project-card" onclick="openImageModal('affiche 01cmjn.jpg', 'TAKAPES - Cultural Heritage Project')">
+                                <div class="project-image">
+                                    <img src="affiche 01cmjn.jpg" alt="TAKAPES Cultural Project" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">TAKAPES - Cultural Heritage Project</h3>
+                                    <p class="project-description">
+                                        Cultural tourism posters promoting Tamazgha heritage and Gabès coastal beauty, featuring traditional architecture and Mediterranean landscapes with French typography.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Cultural Tourism</span>
+                                        <span class="project-tag">Heritage Design</span>
+                                        <span class="project-tag">Mediterranean Culture</span>
+                                        <span class="project-tag">Tourism Promotion</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Gabès Corniche -->
+                            <div class="project-card" onclick="openImageModal('affiche 03cmjn.jpg', 'Gabès Corniche - Tourism Poster')">
+                                <div class="project-image">
+                                    <img src="affiche 03cmjn.jpg" alt="Gabes Corniche Poster" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Gabès Corniche - Tourism Poster</h3>
+                                    <p class="project-description">
+                                        Elegant tourism poster showcasing the coastal splendor of Gabès with Mediterranean aesthetics, sophisticated typography, and beautiful landscape photography.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Tourism Design</span>
+                                        <span class="project-tag">Coastal Aesthetic</span>
+                                        <span class="project-tag">Mediterranean</span>
+                                        <span class="project-tag">Typography</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Paintball Event -->
+                            <div class="project-card" onclick="openImageModal('481568552_663410669691100_8698163862692790795_n.jpg', 'Paintball Event - TPL ISIMG')">
+                                <div class="project-image">
+                                    <img src="481568552_663410669691100_8698163862692790795_n.jpg" alt="Paintball Event" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Paintball Event - TPL ISIMG</h3>
+                                    <p class="project-description">
+                                        Vibrant event poster for a paintball activity with dynamic layout, bold typography and energetic color scheme promoting team sports and outdoor activities.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Event Design</span>
+                                        <span class="project-tag">Sports Activity</span>
+                                        <span class="project-tag">Dynamic Layout</span>
+                                        <span class="project-tag">Team Sports</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Additional Event Posters -->
+                            <div class="project-card" onclick="openImageModal('482004623_664157689616398_2540399281214503221_n.jpg', 'Student Event - Creative Campaign')">
+                                <div class="project-image">
+                                    <img src="482004623_664157689616398_2540399281214503221_n.jpg" alt="Event Poster" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Student Event - Creative Campaign</h3>
+                                    <p class="project-description">
+                                        Creative event poster for student activities featuring modern design elements and engaging visual composition for university events.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Student Events</span>
+                                        <span class="project-tag">Creative Campaign</span>
+                                        <span class="project-tag">University Design</span>
+                                        <span class="project-tag">Modern Layout</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- IEEE Event Poster -->
+                            <div class="project-card" onclick="openImageModal('515157624_720375830715805_8172833324396552827_n.jpg', 'Artech Workshop Poster')">
+                                <div class="project-image">
+                                    <img src="515157624_720375830715805_8172833324396552827_n.jpg" alt="IEEE Event" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Artech Workshop Poster</h3>
+                                    <p class="project-description">
+                                        Professional event poster for Artech workshops featuring clean design, technical aesthetics, and professional branding for engineering events.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">IEEE Events</span>
+                                        <span class="project-tag">Technical Design</span>
+                                        <span class="project-tag">Professional Branding</span>
+                                        <span class="project-tag">Engineering</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Creative Workshop Poster -->
+                            <div class="project-card" onclick="openImageModal('515827805_122093471876944245_4711919372905149580_n.jpg', 'Creative Workshop Series')">
+                                <div class="project-image">
+                                    <img src="515827805_122093471876944245_4711919372905149580_n.jpg" alt="Creative Workshop" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Creative Workshop Series</h3>
+                                    <p class="project-description">
+                                        Artistic poster design for creative workshops and design thinking sessions, featuring innovative typography and creative visual elements.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Creative Workshops</span>
+                                        <span class="project-tag">Design Thinking</span>
+                                        <span class="project-tag">Artistic Design</span>
+                                        <span class="project-tag">Innovation</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="project-card" onclick="openImageModal('RAYEN YOUSSEF 2.jpg', 'Rayen Youssef Poster')">
+                                <div class="project-image">
+                                    <img src="RAYEN YOUSSEF 2.png" alt="Creative Workshop" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Rayen Youssef Poster</h3>
+                                    <p class="project-description">
+                                        Artistic poster design for The artist Rayen Youssef, featuring innovative typography and creative visual elements.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Creative Workshops</span>
+                                        <span class="project-tag">Design Thinking</span>
+                                        <span class="project-tag">Artistic Design</span>
+                                        <span class="project-tag">Innovation</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+                              <div class="project-card" onclick="openImageModal('482348219_663409443024556_6585034358554204094_n.jpg', 'GoMycode x TPL poster')">
+                                <div class="project-image">
+                                    <img src="482348219_663409443024556_6585034358554204094_n.jpg" alt="Creative Workshop" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">GoMycode x TPL poster</h3>
+                                    <p class="project-description">
+                                        Artistic poster design for GoMycode x TPL, featuring innovative typography and creative visual elements.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Creative Workshops</span>
+                                        <span class="project-tag">Design Thinking</span>
+                                        <span class="project-tag">Artistic Design</span>
+                                        <span class="project-tag">Innovation</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- Digital Assets -->
+                            <div class="project-card" onclick="openImageModal('484190131_664806429551524_1033460294910019344_n.jpg', 'Robotics and STM poster')">
+                                <div class="project-image">
+                                    <img src="484190131_664806429551524_1033460294910019344_n.jpg" alt="Digital Assets" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="project-info">
+                                    <h3 class="project-title">Robotics and STM poster</h3>
+                                    <p class="project-description">
+                                        Collection of digital assets, icons, and graphic elements for various design projects, showcasing versatility in digital design creation.
+                                    </p>
+                                    <div class="project-tags">
+                                        <span class="project-tag">Digital Assets</span>
+                                        <span class="project-tag">Icon Design</span>
+                                        <span class="project-tag">Graphic Elements</span>
+                                        <span class="project-tag">UI Components</span>
+                                    </div>
+                                    <span class="project-link">
+                                        View Full Image →
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+
+ <!-- Development Projects Tab - COMING SOON -->
+<div id="development" class="tab-content">
+    <div class="coming-soon">
+        <h3>Development Projects Coming Soon!</h3>
+        <p>
+            I'm currently working on exciting mobile development projects using Flutter, Ionic, and Android Studio. 
+            These projects will showcase my skills in mobile app development, including innovative features and modern UI implementations.
+            Stay tuned for updates on my latest development work!
+        </p>
+        <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <span style="background: rgba(0, 255, 255, 0.1); color: #00ffff; padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(0, 255, 255, 0.3);">Flutter Apps</span>
+            <span style="background: rgba(0, 255, 255, 0.1); color: #00ffff; padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(0, 255, 255, 0.3);">Ionic Projects</span>
+            <span style="background: rgba(0, 255, 255, 0.1); color: #00ffff; padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(0, 255, 255, 0.3);">Android Apps</span>
+            <span style="background: rgba(0, 255, 255, 0.1); color: #00ffff; padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid rgba(0, 255, 255, 0.3);">Web Applications</span>
+        </div>
+    </div>
+</div>                   
+
+        <!-- Experience Section -->
+        <section id="experience" class="section">
+            <div class="experience-content">
+                <h2 class="section-title">Experience</h2>
+                <div class="experience-timeline">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="experience-item">
+                        <div class="experience-number">01</div>
+                        <div class="experience-details">
+                            <h3 class="experience-title">UI/UX Designer</h3>
+                            <div class="experience-company">AllCarta</div>
+                            <div class="experience-date">August 2024</div>
+                            <p class="experience-description">Assisted in designing a university club management app at AllCarta, focusing on user experience and interface design.</p>
+                            <ul class="experience-achievements">
+                                <li>Designed wireframes and prototypes with Figma</li>
+                                <li>Worked alongside developers to ensure a smooth user experience</li>
+                                <li>Ensured effective design execution throughout the development process</li>
+                            </ul>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Figma</span>
+                                <span class="tech-tag">UI/UX Design</span>
+                                <span class="tech-tag">Prototyping</span>
+                                <span class="tech-tag">User Experience</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-number">02</div>
+                        <div class="experience-details">
+                            <h3 class="experience-title">Graphic Designer</h3>
+                            <div class="experience-company">G-Team</div>
+                            <div class="experience-date">July 2023</div>
+                            <p class="experience-description">Developed graphic design skills during internship at G-Team, working on various branding and digital content projects.</p>
+                            <ul class="experience-achievements">
+                                <li>Designed branding materials and digital content using Adobe Creative Suite</li>
+                                <li>Worked closely with the design team to maintain high-quality output</li>
+                                <li>Ensured consistent branding across all design materials</li>
+                            </ul>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Adobe Creative Suite</span>
+                                <span class="tech-tag">Branding</span>
+                                <span class="tech-tag">Digital Content</span>
+                                <span class="tech-tag">Graphic Design</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-number">03</div>
+                        <div class="experience-details">
+                            <h3 class="experience-title">Media Manager</h3>
+                            <div class="experience-company">IEEE ISIMG</div>
+                            <div class="experience-date">2024</div>
+                            <p class="experience-description">Managed media content and visual communications for IEEE ISIMG chapter, creating engaging content for various events and activities.</p>
+                            <ul class="experience-achievements">
+                                <li>Created visual content for social media platforms</li>
+                                <li>Managed event photography and videography</li>
+                                <li>Coordinated media campaigns for IEEE events</li>
+                            </ul>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Social Media</span>
+                                <span class="tech-tag">Content Creation</span>
+                                <span class="tech-tag">Event Management</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-number">04</div>
+                        <div class="experience-details">
+                            <h3 class="experience-title">Media Manager</h3>
+                            <div class="experience-company">We Are Gabès & Tpl ISIMG</div>
+                            <div class="experience-date">2022 - 2023</div>
+                            <p class="experience-description">Managed media content for multiple organizations, developing strong visual communication skills and brand management expertise.</p>
+                            <ul class="experience-achievements">
+                                <li>Developed comprehensive media strategies</li>
+                                <li>Created consistent visual branding across platforms</li>
+                                <li>Managed multiple social media accounts simultaneously</li>
+                            </ul>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Brand Management</span>
+                                <span class="tech-tag">Visual Communication</span>
+                                <span class="tech-tag">Multi-platform Management</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="section">
+            <div class="education-content">
+                <h2 class="section-title">Education</h2>
+                <div class="education-grid">
+                    <div class="education-item">
+                        <div class="education-degree">Bachelor of Arts and Mediation</div>
+                        <div class="education-school">Higher Institute of Computer Science and Multimedia in Gabès</div>
+                        <div class="education-year">2022 - 2025</div>
+                    </div>
+                    <div class="education-item">
+                        <div class="education-degree">Baccalaureate of Computer Science</div>
+                        <div class="education-school">High School March 2, 1934</div>
+                        <div class="education-year">2022</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section id="achievements" class="section">
+            <div class="achievements-content">
+                <h2 class="section-title">Achievements</h2>
+                <div class="achievements-grid">
+                    <div class="achievement-item">
+                        <div class="achievement-badge">2nd Place</div>
+                        <div class="achievement-title">Xdays Hackathon</div>
+                        <div class="achievement-subtitle">Higher Institute of Computer Science and Multimedia in Gabès</div>
+                        <div class="achievement-date">March 2024</div>
+                        <div class="achievement-description">
+                            Participated in the Xdays Hackathon, designing a visual identity for our institute. Contributed to a team that earned second place, demonstrating strong collaboration and quality work under pressure. Reinforced passion for graphic design through the competitive experience.
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-item">
+                        <div class="achievement-title">Logo Design for University of Gabès</div>
+                        <div class="achievement-subtitle">20th Anniversary Logo</div>
+                        <div class="achievement-date">March 2023</div>
+                        <div class="achievement-description">
+                            Designed a new logo for the University of Gabès' 20th anniversary. Applied graphic design skills to create a modern identity aligned with the university's values. Strengthened passion for design and enhanced the university's branding efforts.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="contact-content">
+                <h2 class="section-title">Contact</h2>
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-symbol">@</div>
+                        <div class="contact-label">Email</div>
+                        <div class="contact-value">mohamedamine.yahyaoui@isimg.tn</div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-symbol">+</div>
+                        <div class="contact-label">Phone</div>
+                        <div class="contact-value">+216-96351731</div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-symbol">📍</div>
+                        <div class="contact-label">Location</div>
+                        <div class="contact-value">L'aaouina, Tunis</div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-symbol">IN</div>
+                        <div class="contact-label">LinkedIn</div>
+                        <div class="contact-value">mohamedamineyahyaoui</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 3rem; padding: 2rem; background: rgba(0, 255, 255, 0.05); border: 1px solid rgba(0, 255, 255, 0.2); border-radius: 15px;">
+                    <h3 style="color: #00ffff; margin-bottom: 1rem; font-size: 1.5rem;">Ready to collaborate?</h3>
+                    <p style="color: #e0e0e0; line-height: 1.6;">
+                        I'm passionate about mobile development, UI/UX design, and creating innovative digital solutions. 
+                        Let's work together to bring your ideas to life with cutting-edge technology and creative design.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header" id="imageModalTitle">
+                Image Preview
+            </div>
+            <span class="close" onclick="closeModal('imageModal')">&times;</span>
+            <img class="modal-image" id="modalImage" src="" alt="Full Size Image">
+        </div>
+    </div>
+
+    <!-- PDF Modal -->
+    <div id="pdfModal" class="modal">
+        <div class="pdf-container">
+            <div class="modal-header" id="pdfModalTitle">
+                PDF Document
+                <span class="close" onclick="closeModal('pdfModal')" style="float: right;">&times;</span>
+            </div>
+            <iframe class="pdf-frame" id="pdfFrame" src=""></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Project tabs functionality
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Generate animated stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 200;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Random size
+                const sizes = ['small', 'medium', 'large'];
+                const size = sizes[Math.floor(Math.random() * sizes.length)];
+                star.classList.add(size);
+                
+                // Random position
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                
+                // Random animation delay
+                star.style.animationDelay = Math.random() * 3 + 's';
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Smooth scrolling function
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+            
+            // Update active navigation
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Intersection Observer for navigation highlighting
+        function setupIntersectionObserver() {
+            const sections = document.querySelectorAll('.section');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sectionId = entry.target.id;
+                        navItems.forEach(item => {
+                            item.classList.remove('active');
+                            if (item.getAttribute('href') === `#${sectionId}`) {
+                                item.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            sections.forEach(section => observer.observe(section));
+        }
+
+        // Modal Functions
+        function openImageModal(imageSrc, title) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('imageModalTitle');
+            
+            modalImage.src = imageSrc;
+            modalTitle.textContent = title;
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openPDFModal(pdfSrc, title) {
+            // Open PDF in new tab
+            window.open(pdfSrc, '_blank');
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+            
+            // Clear iframe src to stop loading
+            if (modalId === 'pdfModal') {
+                document.getElementById('pdfFrame').src = '';
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            setupIntersectionObserver();
+        });
+
+        // Parallax effect for energy element
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const energyElement = document.querySelector('.energy-element');
+            if (energyElement) {
+                energyElement.style.transform = `translateY(${scrollY * 0.3}px)`;
+            }
+        });
+
+        // Add click handlers for navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = item.getAttribute('href').substring(1);
+                scrollToSection(targetId);
+            });
+        });
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(event) {
+            const imageModal = document.getElementById('imageModal');
+            const pdfModal = document.getElementById('pdfModal');
+            
+            if (event.target === imageModal) {
+                closeModal('imageModal');
+            }
+            if (event.target === pdfModal) {
+                closeModal('pdfModal');
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal('imageModal');
+                closeModal('pdfModal');
+            }
+        });
+    </script>
+</body>
+</html>
